@@ -61,7 +61,7 @@ export default function HeroSection() {
             variants={fadeUp}
             className="font-body text-white/70 text-lg leading-relaxed mb-10 max-w-md"
           >
-            Discover our curated collection of luxury Nigerian fashion — crafted for the bold, worn by the distinguished.
+            Discover our curated collection of luxury Nigerian fashion — sourced for the bold, worn by the distinguished.
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">

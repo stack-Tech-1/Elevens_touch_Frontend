@@ -46,9 +46,21 @@ export default function Navbar() {
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <span className="font-display text-white text-xl lg:text-2xl tracking-widest group-hover:text-mauve transition-colors duration-300">
-                ELEVENS TOUCH
-              </span>
+              <Image
+                src="/logo/ET.png"
+                alt="Elevens Touch Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-display text-white text-lg lg:text-xl tracking-widest group-hover:text-mauve transition-colors duration-300">
+                  ELEVENS TOUCH
+                </span>
+                <span className="hidden lg:block font-body text-white/50 text-[10px] tracking-wide mt-0.5">
+                  Styling you to a Ten and more...
+                </span>
+              </div>
             </Link>
 
             {/* Desktop nav links */}

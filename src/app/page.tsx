@@ -134,8 +134,8 @@ export default function HomePage() {
                 Born from the<br />Heart of Nigeria
               </h2>
               <p className="font-body text-white/70 text-base leading-relaxed mb-8">
-                Elevens Touch was born from a deep love of Nigerian culture and an unwavering commitment to excellence.
-                Every piece tells a story — of tradition, of artisanship, of a people who understand that true luxury is timeless.
+                Elevens Touch was built on a simple belief: Nigerians deserve access to the finest fashion, beautifully curated and delivered to your door.
+                Every piece we carry is handpicked for quality, style, and authenticity.
               </p>
               <Link
                 href="/about"

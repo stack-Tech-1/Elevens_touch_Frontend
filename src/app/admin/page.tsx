@@ -38,9 +38,42 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductForm>({
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<ProductForm>({
     resolver: zodResolver(productSchema),
   });
+  const [imageUploading, setImageUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const watchedImages = watch('images');
+
+  const uploadToCloudinary = async (file: File): Promise<string> => {
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+    if (!cloudName || !uploadPreset) throw new Error('Cloudinary not configured');
+    const form = new FormData();
+    form.append('file', file);
+    form.append('upload_preset', uploadPreset);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, { method: 'POST', body: form });
+    if (!res.ok) throw new Error('Upload failed');
+    const data = await res.json();
+    return data.secure_url as string;
+  };
+
+  const handleImageFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImagePreview(URL.createObjectURL(file));
+    setImageUploading(true);
+    try {
+      const url = await uploadToCloudinary(file);
+      setValue('images', url);
+      setImagePreview(url);
+    } catch {
+      alert('Image upload failed. Please check your Cloudinary settings or paste a URL instead.');
+      setImagePreview('');
+    } finally {
+      setImageUploading(false);
+    }
+  };
 
   useEffect(() => {
     if (!user?.isAdmin) { router.push('/'); return; }
@@ -58,11 +91,13 @@ export default function AdminPage() {
   const openAdd = () => {
     setEditing(null);
     reset({ name: '', description: '', price: '', category: '', stock: '0', sizes: '', colors: '', images: '', badge: '' });
+    setImagePreview('');
     setModalOpen(true);
   };
 
   const openEdit = (p: Product) => {
     setEditing(p);
+    const firstImage = p.images?.[0] || '';
     reset({
       name: p.name,
       description: p.description,
@@ -72,9 +107,10 @@ export default function AdminPage() {
       stock: String(p.stock),
       sizes: p.sizes?.join(', ') || '',
       colors: p.colors?.join(', ') || '',
-      images: p.images?.join(', ') || '',
+      images: firstImage,
       badge: (p.badge as '' | 'new' | 'sale' | 'bestseller') || '',
     });
+    setImagePreview(firstImage);
     setModalOpen(true);
   };
 
@@ -277,9 +313,8 @@ export default function AdminPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
                 {[
                   { name: 'name', label: 'Product Name', placeholder: 'Adire Silk Dress' },
-                  { name: 'description', label: 'Description', placeholder: 'A beautiful hand-crafted piece…', textarea: true },
+                  { name: 'description', label: 'Description', placeholder: 'A beautiful curated piece…', textarea: true },
                   { name: 'category', label: 'Category', placeholder: 'dress' },
-                  { name: 'images', label: 'Image URLs (comma-separated)', placeholder: 'https://…, https://…' },
                   { name: 'sizes', label: 'Sizes (comma-separated)', placeholder: 'XS, S, M, L, XL' },
                   { name: 'colors', label: 'Colors (comma-separated)', placeholder: 'Black, Ivory, Navy' },
                 ].map(({ name, label, placeholder, textarea }) => (
@@ -304,6 +339,31 @@ export default function AdminPage() {
                     )}
                   </div>
                 ))}
+
+                {/* Image upload */}
+                <div>
+                  <label className="block font-body text-burgundy/70 text-xs uppercase tracking-wide mb-1.5">Product Image</label>
+                  <input type="hidden" {...register('images')} />
+                  <div className="flex gap-3 items-start">
+                    <label className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-dashed cursor-pointer transition-colors text-sm font-body ${imageUploading ? 'border-mauve bg-mauve/5 text-mauve' : 'border-blush-dark bg-blush/20 text-burgundy/50 hover:border-mauve hover:text-mauve'}`}>
+                      <input type="file" accept="image/*" className="hidden" onChange={handleImageFile} disabled={imageUploading} />
+                      {imageUploading ? <><Loader2 size={15} className="animate-spin" /> Uploading…</> : '📷 Click to upload image'}
+                    </label>
+                    {(imagePreview || watchedImages) && (
+                      <div className="w-16 h-16 rounded-xl overflow-hidden bg-blush shrink-0 border border-blush-dark">
+                        <Image src={imagePreview || watchedImages} alt="preview" width={64} height={64} className="object-cover w-full h-full" />
+                      </div>
+                    )}
+                  </div>
+                  <p className="font-body text-burgundy/40 text-xs mt-1.5">Or paste a URL below:</p>
+                  <input
+                    value={watchedImages}
+                    onChange={e => { setValue('images', e.target.value); setImagePreview(e.target.value); }}
+                    placeholder="https://…"
+                    className="w-full mt-1 px-4 py-3 rounded-xl border border-blush-dark bg-blush/20 font-body text-burgundy placeholder-burgundy/30 focus:outline-none focus:border-mauve text-sm"
+                  />
+                  {errors.images && <p className="text-mauve text-xs mt-1">{errors.images.message}</p>}
+                </div>
 
                 <div className="grid grid-cols-3 gap-4">
                   <div>

@@ -5,14 +5,14 @@ import { ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Our Story — Elevens Touch',
-  description: 'Learn about the story behind Elevens Touch, Nigerian luxury fashion brand.',
+  description: 'Learn about the story behind Elevens Touch, Nigerian luxury fashion.',
 };
 
 const values = [
-  { title: 'Heritage', description: 'We draw from centuries of Nigerian textile tradition — Adire, Ankara, Aso-oke — weaving history into every piece.' },
-  { title: 'Craftsmanship', description: 'Each garment is carefully constructed with attention to detail that honours both the artisan and the wearer.' },
-  { title: 'Excellence', description: 'We refuse to compromise on quality. Only the finest fabrics, the most refined silhouettes, the purest expression of luxury.' },
-  { title: 'Identity', description: 'Our clothes are a celebration of Nigerian identity — bold, beautiful, and unapologetically proud.' },
+  { title: 'Heritage', description: 'We celebrate centuries of Nigerian fashion tradition — Adire, Ankara, Aso-oke — and bring the best of that heritage directly to you.' },
+  { title: 'Quality', description: 'We inspect every item before it reaches you. If it doesn\'t meet our standard of excellence, it doesn\'t make the cut.' },
+  { title: 'Excellence', description: 'We refuse to compromise. Only the finest pieces, the most refined styles, and the purest expression of Nigerian luxury.' },
+  { title: 'Identity', description: 'Every item we carry is a celebration of Nigerian identity — bold, beautiful, and unapologetically proud.' },
 ];
 
 export default function AboutPage() {
@@ -40,16 +40,16 @@ export default function AboutPage() {
             <h2 className="font-display text-burgundy text-3xl tracking-wide mb-6">A Vision for Nigerian Luxury</h2>
             <div className="space-y-4 font-body text-burgundy/70 text-base leading-relaxed">
               <p>
-                Elevens Touch was founded with a singular vision: to create a Nigerian luxury fashion house that could stand alongside
-                the world&apos;s greatest names — not by imitation, but by celebrating everything that makes Nigerian fashion extraordinary.
+                Elevens Touch was founded with one mission: to bring the best of Nigerian and African fashion
+                directly to you — carefully sourced, quality-checked, and ready to wear.
               </p>
               <p>
-                We believe that Nigerian fashion is not a subset of world fashion — it IS world fashion. The richness of our textiles,
-                the boldness of our patterns, the elegance of our silhouettes: these are gifts to the world.
+                We believe Nigerian fashion is world-class. We travel the market, handpick every item, and
+                bring you only the pieces that meet our standard of style and quality.
               </p>
               <p>
-                Every piece we create is a declaration. That Nigerian craftsmanship is world-class. That African elegance is timeless.
-                That luxury has always lived here.
+                Every piece we carry is a statement — that African fashion belongs at the top, and you
+                deserve to wear it.
               </p>
             </div>
           </div>
@@ -90,9 +90,9 @@ export default function AboutPage() {
       <section className="py-20 bg-blush text-center">
         <div className="max-w-2xl mx-auto px-4">
           <p className="font-body text-mauve text-xs uppercase tracking-[0.3em] mb-4">Ready to Experience It?</p>
-          <h2 className="font-display text-burgundy text-3xl tracking-wide mb-6">Wear the Story</h2>
+          <h2 className="font-display text-burgundy text-3xl tracking-wide mb-6">Shop the Look</h2>
           <p className="font-body text-burgundy/60 mb-8 leading-relaxed">
-            Every garment carries the weight of tradition and the lightness of joy. Discover the collection that tells your story.
+            Every piece we carry was chosen with you in mind. Discover the collection and find something that tells your story.
           </p>
           <Link
             href="/shop"
