@@ -118,7 +118,7 @@ export default function CheckoutPage() {
                     { name: 'firstName', label: 'First Name', placeholder: 'Adaobi', col: 1 },
                     { name: 'lastName', label: 'Last Name', placeholder: 'Okafor', col: 1 },
                     { name: 'email', label: 'Email Address', placeholder: 'adaobi@email.com', col: 2 },
-                    { name: 'phone', label: 'Phone Number', placeholder: '+234 XXX XXX XXXX', col: 2 },
+                    { name: 'phone', label: 'Phone Number', placeholder: '+234 906 186 2984', col: 2 },
                     { name: 'address', label: 'Street Address', placeholder: '123 Victoria Island', col: 2 },
                     { name: 'city', label: 'City', placeholder: 'Lagos', col: 1 },
                     { name: 'state', label: 'State', placeholder: 'Lagos State', col: 1 },

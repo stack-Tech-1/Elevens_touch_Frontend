@@ -12,8 +12,8 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <h3 className="font-display text-xl tracking-widest text-white mb-4">ELEVENS TOUCH</h3>
             <p className="font-body text-white/70 text-sm leading-relaxed mb-6">
-              Nigerian luxury fashion — where heritage meets contemporary elegance.
-              Crafted for the bold, worn by the distinguished.
+              Nigerian luxury fashion, where heritage meets contemporary elegance.
+              Curated for the bold, worn by the distinguished.
             </p>
             <div className="flex gap-4">
               {[
@@ -76,15 +76,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex gap-3 text-sm text-white/60">
                 <MapPin size={16} className="text-mauve mt-0.5 shrink-0" />
-                <span className="font-body">Lagos, Nigeria</span>
+                <span className="font-body">Ibadan, Oyo State, Nigeria</span>
               </li>
               <li className="flex gap-3 text-sm text-white/60">
                 <Phone size={16} className="text-mauve shrink-0" />
-                <a href="tel:+234" className="font-body hover:text-mauve transition-colors">+234 XXX XXX XXXX</a>
+                <a href="tel:+2349061862984" className="font-body hover:text-mauve transition-colors">+234 906 186 2984</a>
               </li>
               <li className="flex gap-3 text-sm text-white/60">
                 <Mail size={16} className="text-mauve shrink-0" />
-                <a href="mailto:hello@elevenstouch.com" className="font-body hover:text-mauve transition-colors">hello@elevenstouch.com</a>
+                <a href="mailto:Elevenstouch@gmail.com" className="font-body hover:text-mauve transition-colors">Elevenstouch@gmail.com</a>
               </li>
             </ul>
 

@@ -45,16 +45,16 @@ export default function ContactPage() {
             <div>
               <h2 className="font-display text-burgundy text-2xl tracking-wide mb-4">We&apos;d love to hear from you</h2>
               <p className="font-body text-burgundy/60 leading-relaxed">
-                Whether you have a question about a product, need help with your order, or just want to say hello —
+                Whether you have a question about a product, need help with your order, or just want to say hello,
                 we&apos;re here for you.
               </p>
             </div>
 
             <div className="space-y-6">
               {[
-                { Icon: MapPin, label: 'Location', value: 'Lagos, Nigeria' },
-                { Icon: Phone, label: 'Phone', value: '+234 XXX XXX XXXX' },
-                { Icon: Mail, label: 'Email', value: 'hello@elevenstouch.com' },
+                { Icon: MapPin, label: 'Location', value: 'Ibadan, Oyo State, Nigeria' },
+                { Icon: Phone, label: 'Phone', value: '+234 906 186 2984' },
+                { Icon: Mail, label: 'Email', value: 'Elevenstouch@gmail.com' },
               ].map(({ Icon, label, value }) => (
                 <div key={label} className="flex gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-burgundy flex items-center justify-center shrink-0">

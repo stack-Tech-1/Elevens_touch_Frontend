@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Elevens Touch — Nigerian Luxury Fashion',
-  description: 'Discover premium Nigerian luxury fashion. Crafted for the bold, worn by the distinguished.',
+  description: 'Discover premium Nigerian luxury fashion. Curated for the bold, worn by the distinguished.',
   keywords: 'Nigerian fashion, luxury clothing, African fashion, Elevens Touch',
 };
 

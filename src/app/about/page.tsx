@@ -9,10 +9,10 @@ export const metadata = {
 };
 
 const values = [
-  { title: 'Heritage', description: 'We celebrate centuries of Nigerian fashion tradition — Adire, Ankara, Aso-oke — and bring the best of that heritage directly to you.' },
+  { title: 'Heritage', description: 'We celebrate centuries of Nigerian fashion tradition: Adire, Ankara, Aso-oke, and bring the best of that heritage directly to you.' },
   { title: 'Quality', description: 'We inspect every item before it reaches you. If it doesn\'t meet our standard of excellence, it doesn\'t make the cut.' },
   { title: 'Excellence', description: 'We refuse to compromise. Only the finest pieces, the most refined styles, and the purest expression of Nigerian luxury.' },
-  { title: 'Identity', description: 'Every item we carry is a celebration of Nigerian identity — bold, beautiful, and unapologetically proud.' },
+  { title: 'Identity', description: 'Every item we carry is a celebration of Nigerian identity: bold, beautiful, and unapologetically proud.' },
 ];
 
 export default function AboutPage() {
@@ -41,14 +41,14 @@ export default function AboutPage() {
             <div className="space-y-4 font-body text-burgundy/70 text-base leading-relaxed">
               <p>
                 Elevens Touch was founded with one mission: to bring the best of Nigerian and African fashion
-                directly to you — carefully sourced, quality-checked, and ready to wear.
+                directly to you, carefully sourced, quality-checked, and ready to wear.
               </p>
               <p>
                 We believe Nigerian fashion is world-class. We travel the market, handpick every item, and
                 bring you only the pieces that meet our standard of style and quality.
               </p>
               <p>
-                Every piece we carry is a statement — that African fashion belongs at the top, and you
+                Every piece we carry is a statement: that African fashion belongs at the top, and you
                 deserve to wear it.
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             </div>
             <div className="absolute -bottom-6 -left-6 bg-mauve text-white rounded-2xl p-6 shadow-xl">
               <p className="font-display text-2xl">2020</p>
-              <p className="font-body text-white/80 text-sm">Founded in Lagos</p>
+              <p className="font-body text-white/80 text-sm">Founded in Ibadan, Oyo State</p>
             </div>
           </div>
         </div>
