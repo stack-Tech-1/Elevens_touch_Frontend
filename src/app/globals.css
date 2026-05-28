@@ -14,6 +14,7 @@
   --color-gold: #f2a654;
   --font-display: 'Cinzel Decorative', cursive;
   --font-body: 'Playfair Display', serif;
+  --font-script: 'Dancing Script', cursive;
 }
 
 @theme inline {

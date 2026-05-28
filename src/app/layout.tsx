@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cinzel_Decorative, Playfair_Display } from 'next/font/google';
+import { Cinzel_Decorative, Playfair_Display, Dancing_Script } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { CartProvider } from '@/context/CartContext';
@@ -22,6 +22,13 @@ const playfairDisplay = Playfair_Display({
   display: 'swap',
 });
 
+const dancingScript = Dancing_Script({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-script',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Elevens Touch — Nigerian Luxury Fashion',
   description: 'Discover premium Nigerian luxury fashion. Curated for the bold, worn by the distinguished.',
@@ -30,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`h-full scroll-smooth ${cinzelDecorative.variable} ${playfairDisplay.variable}`}>
+    <html lang="en" className={`h-full scroll-smooth ${cinzelDecorative.variable} ${playfairDisplay.variable} ${dancingScript.variable}`}>
       <body className="min-h-full flex flex-col antialiased bg-white">
         <AuthProvider>
           <WishlistProvider>
