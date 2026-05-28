@@ -54,7 +54,7 @@ export default function ContactPage() {
               {[
                 { Icon: MapPin, label: 'Location', value: 'Ibadan, Oyo State, Nigeria' },
                 { Icon: Phone, label: 'Phone', value: '+234 906 186 2984' },
-                { Icon: Mail, label: 'Email', value: 'Elevenstouch@gmail.com' },
+                { Icon: Mail, label: 'Email', value: 'theelevenstouch@gmail.com' },
               ].map(({ Icon, label, value }) => (
                 <div key={label} className="flex gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-burgundy flex items-center justify-center shrink-0">

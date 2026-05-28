@@ -52,9 +52,9 @@ export default function HeroSection() {
             variants={fadeUp}
             className="font-display text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-wide mb-6"
           >
-            Where Heritage
+            Styling you to a ten
             <br />
-            <span className="text-mauve">Meets Elegance</span>
+            <span className="text-mauve sm:italic">and more</span>
           </motion.h1>
 
           <motion.p

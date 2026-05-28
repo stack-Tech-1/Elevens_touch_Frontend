@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { ShoppingBag, Menu, X, User, LogOut, Settings, Package } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, LogOut, Settings, Package, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import AuthModal from './AuthModal';
 import CartSidebar from './CartSidebar';
 
@@ -25,6 +26,7 @@ export default function Navbar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { count, openCart } = useCart();
+  const { count: wishlistCount } = useWishlist();
   const pathname = usePathname();
   const isHome = pathname === '/';
 
@@ -57,7 +59,7 @@ export default function Navbar() {
                 <span className="font-display text-white text-lg lg:text-xl tracking-widest group-hover:text-mauve transition-colors duration-300">
                   ELEVENS TOUCH
                 </span>
-                <span className="hidden lg:block font-body text-white/50 text-[10px] tracking-wide mt-0.5">
+                <span className="font-body text-white/50 text-[10px] tracking-wide mt-0.5">
                   Styling you to a Ten and more...
                 </span>
               </div>
@@ -129,6 +131,23 @@ export default function Navbar() {
                 </button>
               )}
 
+              <Link
+                href="/wishlist"
+                className="relative text-white/80 hover:text-white transition-colors p-1"
+              >
+                <Heart size={22} />
+                {wishlistCount > 0 && (
+                  <motion.span
+                    key={wishlistCount}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1.5 -right-1.5 bg-mauve text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                  >
+                    {wishlistCount}
+                  </motion.span>
+                )}
+              </Link>
+
               <button
                 onClick={openCart}
                 className="relative text-white/80 hover:text-white transition-colors p-1"
@@ -149,6 +168,14 @@ export default function Navbar() {
 
             {/* Mobile buttons */}
             <div className="flex lg:hidden items-center gap-3">
+              <Link href="/wishlist" className="relative text-white p-1">
+                <Heart size={22} />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-mauve text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
               <button onClick={openCart} className="relative text-white p-1">
                 <ShoppingBag size={22} />
                 {count > 0 && (
@@ -194,6 +221,9 @@ export default function Navbar() {
                 <div className="pt-4 space-y-3">
                   {user ? (
                     <>
+                      <Link href="/wishlist" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2 text-white/80 hover:text-white font-body">
+                        <Heart size={18} /> My Wishlist
+                      </Link>
                       <Link href="/orders" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2 text-white/80 hover:text-white font-body">
                         <Package size={18} /> My Orders
                       </Link>

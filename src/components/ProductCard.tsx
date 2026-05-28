@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ShoppingBag, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import type { Product } from '@/types';
 
 const BADGE_STYLES: Record<string, string> = {
@@ -20,7 +21,8 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   const { addItem } = useCart();
-  const [wished, setWished] = useState(false);
+  const { toggle, isWishlisted } = useWishlist();
+  const wished = isWishlisted(product._id);
   const [added, setAdded] = useState(false);
 
   const image = product.images?.[0] || '/images/placeholder.jpg';
@@ -62,7 +64,7 @@ export default function ProductCard({ product }: Props) {
 
           {/* Wishlist */}
           <button
-            onClick={e => { e.preventDefault(); setWished(w => !w); }}
+            onClick={e => { e.preventDefault(); toggle(product); }}
             className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-all duration-200 hover:scale-110"
           >
             <Heart
