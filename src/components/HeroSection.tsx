@@ -18,28 +18,27 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
-      {/* Background image */}
-      <Image
-        src="/images/first.jpg"
-        alt="Elevens Touch hero"
-        fill
-        priority
-        className="object-cover object-top"
-        sizes="100vw"
-      />
+    <section className="relative flex flex-col lg:flex-row min-h-screen">
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-burgundy/80 via-burgundy/50 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-burgundy/60 via-transparent to-transparent" />
+      {/* Right: photo — shown first on mobile (top), second on desktop */}
+      <div className="relative h-[55vh] lg:h-auto lg:w-1/2 order-1 lg:order-2 shrink-0">
+        <Image
+          src="/images/hero%205.jpg"
+          alt="Elevens Touch — Nigerian Luxury Fashion"
+          fill
+          priority
+          className="object-cover object-top"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+      </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* Left: content panel */}
+      <div className="lg:w-1/2 bg-[#FDF6F0] flex items-center order-2 lg:order-1 py-16 lg:py-0 min-h-[45vh] lg:min-h-0">
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-xl"
+          className="w-full px-8 sm:px-12 lg:px-16 xl:px-20 max-w-lg mx-auto lg:mx-0 lg:ml-auto"
         >
           <motion.p
             variants={fadeUp}
@@ -50,7 +49,7 @@ export default function HeroSection() {
 
           <motion.h1
             variants={fadeUp}
-            className="font-display text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-wide mb-6"
+            className="font-display text-burgundy text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-wide mb-6"
           >
             Where Heritage
             <br />
@@ -59,7 +58,7 @@ export default function HeroSection() {
 
           <motion.p
             variants={fadeUp}
-            className="font-body text-white/70 text-lg leading-relaxed mb-10 max-w-md"
+            className="font-body text-burgundy/60 text-lg leading-relaxed mb-10 max-w-md"
           >
             Discover our curated collection of luxury Nigerian fashion, sourced for the bold, worn by the distinguished.
           </motion.p>
@@ -67,14 +66,14 @@ export default function HeroSection() {
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-mauve text-white rounded-full font-body text-sm tracking-wide hover:bg-mauve-dark transition-colors group"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-burgundy text-white rounded-full font-body text-sm tracking-wide hover:bg-burgundy-hover transition-colors group"
             >
               Shop Collection
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center justify-center px-8 py-4 border border-white/30 text-white rounded-full font-body text-sm tracking-wide hover:bg-white/10 backdrop-blur-sm transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 border border-burgundy/30 text-burgundy rounded-full font-body text-sm tracking-wide hover:bg-blush transition-colors"
             >
               Our Story
             </Link>
@@ -87,13 +86,13 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/4 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
       >
-        <span className="font-body text-white/40 text-xs uppercase tracking-widest">Scroll</span>
+        <span className="font-body text-burgundy/30 text-xs uppercase tracking-widest">Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"
+          className="w-px h-8 bg-gradient-to-b from-burgundy/30 to-transparent"
         />
       </motion.div>
     </section>
