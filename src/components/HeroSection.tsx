@@ -21,7 +21,7 @@ export default function HeroSection() {
     <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-[#C47A3C]">
 
       {/* Full-bleed on mobile; on desktop confined to right 65% so portrait image isn't over-scaled */}
-      <div className="absolute inset-0 lg:left-[5%]">
+      <div className="absolute inset-0 lg:left-[35%]">
         <Image
           src="/images/hero%205.jpg"
           alt="Elevens Touch — Nigerian Luxury Fashion"
