@@ -31,6 +31,7 @@ export default function HeroSection() {
           sizes="(max-width: 1024px) 100vw, 65vw"
         />
       </div>
+      
 
       {/* Light left-side overlay — only darkens where the text sits, invisible over the model */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/15 to-transparent" />
