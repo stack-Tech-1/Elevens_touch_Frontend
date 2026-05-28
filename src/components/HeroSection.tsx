@@ -18,7 +18,7 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-[#c46b47]">
+    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-[#C47A3C]">
 
       {/* Full-bleed on mobile; on desktop confined to right 65% so portrait image isn't over-scaled */}
       <div className="absolute inset-0 lg:left-[35%]">
