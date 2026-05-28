@@ -57,7 +57,7 @@ export default function HeroSection() {
           >
             Where Heritage
             <br />
-            <span className="text-burgundy italic">Meets Elegance</span>
+            <span className="text-mauve italic">Meets Elegance</span>
           </motion.h1>
 
           <motion.p
