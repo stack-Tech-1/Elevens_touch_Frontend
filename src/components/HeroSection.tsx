@@ -53,11 +53,11 @@ export default function HeroSection() {
 
           <motion.h1
             variants={fadeUp}
-            className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.15] mb-6"
+            className="font-script text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.2] mb-6"
           >
             Where Heritage
             <br />
-            <span className="text-white/90 italic">Meets Elegance</span>
+            <span className="text-burgundy italic">Meets Elegance</span>
           </motion.h1>
 
           <motion.p
