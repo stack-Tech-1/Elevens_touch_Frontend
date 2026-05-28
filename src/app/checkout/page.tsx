@@ -43,6 +43,9 @@ export default function CheckoutPage() {
     defaultValues: { email: user?.email || '' },
   });
 
+  const shippingFee = total >= 50000 ? 0 : 3000;
+  const grandTotal = total + shippingFee;
+
   useEffect(() => {
     if (items.length === 0) router.push('/shop');
   }, [items, router]);
@@ -62,7 +65,7 @@ export default function CheckoutPage() {
     const handler = window.PaystackPop.setup({
       key: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
       email: data.email,
-      amount: total * 100,
+      amount: grandTotal * 100,
       currency: 'NGN',
       ref: `ET-${Date.now()}`,
       onClose: () => setIsProcessing(false),
@@ -77,7 +80,7 @@ export default function CheckoutPage() {
                 size: i.size,
                 color: i.color,
               })),
-              totalAmount: total,
+              totalAmount: grandTotal,
               shippingAddress: data,
               paymentRef: response.reference,
             }, token);
@@ -94,8 +97,6 @@ export default function CheckoutPage() {
   };
 
   if (items.length === 0) return null;
-
-  const shippingFee = total >= 50000 ? 0 : 3000;
 
   return (
     <div className="min-h-screen pt-20 bg-white">
@@ -153,7 +154,7 @@ export default function CheckoutPage() {
                 className="w-full py-4 bg-burgundy text-white rounded-2xl font-body text-sm tracking-wide hover:bg-burgundy-hover transition-colors disabled:opacity-60 flex items-center justify-center gap-3"
               >
                 {isProcessing && <Loader2 size={18} className="animate-spin" />}
-                {isProcessing ? 'Processing…' : `Pay ₦${(total + shippingFee).toLocaleString()} via Paystack`}
+                {isProcessing ? 'Processing…' : `Pay ₦${grandTotal.toLocaleString()} via Paystack`}
               </button>
             </form>
           </div>
@@ -206,7 +207,7 @@ export default function CheckoutPage() {
                 )}
                 <div className="border-t border-blush-dark pt-3 flex justify-between font-body">
                   <span className="text-burgundy font-semibold">Total</span>
-                  <span className="text-burgundy text-xl font-semibold">₦{(total + shippingFee).toLocaleString()}</span>
+                  <span className="text-burgundy text-xl font-semibold">₦{grandTotal.toLocaleString()}</span>
                 </div>
               </div>
             </div>
