@@ -18,17 +18,19 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
+    <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-[#C47A3C]">
 
-      {/* Full-bleed photo — object-right keeps model on right on all screen sizes */}
-      <Image
-        src="/images/hero%205.jpg"
-        alt="Elevens Touch — Nigerian Luxury Fashion"
-        fill
-        priority
-        className="object-cover object-right"
-        sizes="100vw"
-      />
+      {/* Full-bleed on mobile; on desktop confined to right 65% so portrait image isn't over-scaled */}
+      <div className="absolute inset-0 lg:left-[35%]">
+        <Image
+          src="/images/hero%205.jpg"
+          alt="Elevens Touch — Nigerian Luxury Fashion"
+          fill
+          priority
+          className="object-cover object-right"
+          sizes="(max-width: 1024px) 100vw, 65vw"
+        />
+      </div>
 
       {/* Light left-side overlay — only darkens where the text sits, invisible over the model */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/15 to-transparent" />
