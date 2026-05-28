@@ -11,6 +11,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import AuthModal from './AuthModal';
 import CartSidebar from './CartSidebar';
+import WishlistSidebar from './WishlistSidebar';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -26,7 +27,7 @@ export default function Navbar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { count, openCart } = useCart();
-  const { count: wishlistCount } = useWishlist();
+  const { count: wishlistCount, openWishlist } = useWishlist();
   const pathname = usePathname();
   const isHome = pathname === '/';
 
@@ -131,8 +132,8 @@ export default function Navbar() {
                 </button>
               )}
 
-              <Link
-                href="/wishlist"
+              <button
+                onClick={openWishlist}
                 className="relative text-white/80 hover:text-white transition-colors p-1"
               >
                 <Heart size={22} />
@@ -146,7 +147,7 @@ export default function Navbar() {
                     {wishlistCount}
                   </motion.span>
                 )}
-              </Link>
+              </button>
 
               <button
                 onClick={openCart}
@@ -168,14 +169,14 @@ export default function Navbar() {
 
             {/* Mobile buttons */}
             <div className="flex lg:hidden items-center gap-3">
-              <Link href="/wishlist" className="relative text-white p-1">
+              <button onClick={openWishlist} className="relative text-white p-1">
                 <Heart size={22} />
                 {wishlistCount > 0 && (
                   <span className="absolute -top-1.5 -right-1.5 bg-mauve text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
-              </Link>
+              </button>
               <button onClick={openCart} className="relative text-white p-1">
                 <ShoppingBag size={22} />
                 {count > 0 && (
@@ -221,9 +222,6 @@ export default function Navbar() {
                 <div className="pt-4 space-y-3">
                   {user ? (
                     <>
-                      <Link href="/wishlist" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2 text-white/80 hover:text-white font-body">
-                        <Heart size={18} /> My Wishlist
-                      </Link>
                       <Link href="/orders" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2 text-white/80 hover:text-white font-body">
                         <Package size={18} /> My Orders
                       </Link>
@@ -253,6 +251,7 @@ export default function Navbar() {
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
       <CartSidebar />
+      <WishlistSidebar />
     </>
   );
 }
