@@ -58,42 +58,52 @@ export default function CheckoutPage() {
     return () => { document.head.removeChild(script); };
   }, []);
 
+  const handlePaymentSuccess = async (reference: string, shippingAddress: FormData) => {
+    try {
+      if (token) {
+        await createOrder({
+          items: items.map(i => ({
+            product: i.product._id,
+            quantity: i.quantity,
+            price: i.product.salePrice ?? i.product.price,
+            size: i.size,
+            color: i.color,
+          })),
+          totalAmount: grandTotal,
+          shippingAddress,
+          paymentRef: reference,
+        }, token);
+      }
+      clearCart();
+      router.push('/orders');
+    } catch {
+      alert('Order save failed — but payment was received. Please contact support.');
+      setIsProcessing(false);
+    }
+  };
+
   const onSubmit = (data: FormData) => {
     if (!window.PaystackPop) { alert('Payment system loading, please try again.'); return; }
 
     setIsProcessing(true);
-    const handler = window.PaystackPop.setup({
-      key: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
-      email: data.email,
-      amount: grandTotal * 100,
-      currency: 'NGN',
-      ref: `ET-${Date.now()}`,
-      onClose: () => setIsProcessing(false),
-      callback: async (response: { reference: string }) => {
-        try {
-          if (token) {
-            await createOrder({
-              items: items.map(i => ({
-                product: i.product._id,
-                quantity: i.quantity,
-                price: i.product.salePrice ?? i.product.price,
-                size: i.size,
-                color: i.color,
-              })),
-              totalAmount: grandTotal,
-              shippingAddress: data,
-              paymentRef: response.reference,
-            }, token);
-          }
-          clearCart();
-          router.push('/orders');
-        } catch {
-          alert('Order saved failed — but payment was received. Please contact support.');
-          setIsProcessing(false);
-        }
-      },
-    });
-    handler.openIframe();
+    try {
+      const handler = window.PaystackPop.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_KEY!,
+        email: data.email,
+        amount: grandTotal * 100,
+        currency: 'NGN',
+        ref: `ET-${Date.now()}`,
+        onClose: () => setIsProcessing(false),
+        callback: (response: { reference: string }) => {
+          handlePaymentSuccess(response.reference, data);
+        },
+      });
+      handler.openIframe();
+    } catch (err) {
+      console.error('Paystack setup error:', err);
+      setIsProcessing(false);
+      alert('Payment setup failed. Please refresh and try again.');
+    }
   };
 
   if (items.length === 0) return null;
