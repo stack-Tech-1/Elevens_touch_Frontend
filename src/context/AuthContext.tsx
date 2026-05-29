@@ -19,6 +19,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const parsed = JSON.parse(raw);
         setState({ user: parsed.user, token: parsed.token });
+        document.cookie = 'elevens_auth=1; path=/; max-age=604800';
       } catch {
         localStorage.removeItem('elevens_auth');
       }
