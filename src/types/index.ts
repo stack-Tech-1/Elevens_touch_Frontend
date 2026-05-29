@@ -61,6 +61,29 @@ export interface Order {
   createdAt: string;
 }
 
+export interface AdminUser {
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  createdAt: string;
+  orderCount: number;
+  totalSpent: number;
+}
+
+export interface DashboardStats {
+  totalRevenue: number;
+  revenueToday: number;
+  revenueThisWeek: number;
+  revenueThisMonth: number;
+  totalOrders: number;
+  totalCustomers: number;
+  totalProducts: number;
+  ordersByStatus: Record<string, number>;
+  recentOrders: Order[];
+  topProducts: { _id: string; name: string; image?: string; unitsSold: number; revenue: number }[];
+}
+
 export interface ProductFilters {
   category?: string;
   minPrice?: number;

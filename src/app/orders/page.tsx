@@ -75,8 +75,8 @@ export default function OrdersPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
-                className="bg-white border border-blush rounded-2xl p-6 hover:shadow-md transition-shadow"
               >
+              <Link href={`/orders/${order._id}`} className="block bg-white border border-blush rounded-2xl p-6 hover:shadow-md hover:border-mauve/40 transition-all">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 flex-wrap">
@@ -127,6 +127,7 @@ export default function OrdersPage() {
                     <ChevronRight size={18} className="text-burgundy/30" />
                   </div>
                 </div>
+              </Link>
               </motion.div>
             ))}
           </div>

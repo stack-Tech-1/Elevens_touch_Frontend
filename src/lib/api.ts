@@ -1,4 +1,4 @@
-import type { Product, Order, ShippingAddress } from '@/types';
+import type { Product, Order, ShippingAddress, AdminUser, DashboardStats } from '@/types';
 
 const BASE = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -93,5 +93,47 @@ export async function createOrder(
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error('Failed to create order');
+  return res.json();
+}
+
+export async function getOrder(id: string, token: string): Promise<Order> {
+  const res = await fetch(`${BASE}/api/orders/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Order not found');
+  return res.json();
+}
+
+export async function getAllOrders(token: string): Promise<Order[]> {
+  const res = await fetch(`${BASE}/api/orders`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch orders');
+  return res.json();
+}
+
+export async function updateOrderStatus(id: string, status: string, token: string): Promise<Order> {
+  const res = await fetch(`${BASE}/api/orders/${id}/status`, {
+    method: 'PATCH',
+    headers: authHeaders(token),
+    body: JSON.stringify({ status }),
+  });
+  if (!res.ok) throw new Error('Failed to update order status');
+  return res.json();
+}
+
+export async function getAllUsers(token: string): Promise<AdminUser[]> {
+  const res = await fetch(`${BASE}/api/users`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch users');
+  return res.json();
+}
+
+export async function getDashboardStats(token: string): Promise<DashboardStats> {
+  const res = await fetch(`${BASE}/api/analytics/dashboard`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch analytics');
   return res.json();
 }
