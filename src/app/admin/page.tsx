@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 import {
   getProducts, createProduct, updateProduct, deleteProduct,
-  getAllOrders, updateOrderStatus, getAllUsers, getDashboardStats,
+  getAllOrders, updateOrderStatus, getAllUsers, getDashboardStats, promoteUser,
 } from '@/lib/api';
 import type { Product, Order, AdminUser, DashboardStats } from '@/types';
 
@@ -82,6 +82,7 @@ export default function AdminPage() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersLoaded, setUsersLoaded] = useState(false);
+  const [promotingUserId, setPromotingUserId] = useState<string | null>(null);
 
   // Analytics
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -215,6 +216,19 @@ export default function AdminPage() {
       alert('Failed to delete product');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePromote = async (userId: string, makeAdmin: boolean) => {
+    if (!token) return;
+    setPromotingUserId(userId);
+    try {
+      const updated = await promoteUser(userId, makeAdmin, token);
+      setUsers(prev => prev.map(u => u._id === userId ? { ...u, isAdmin: updated.isAdmin } : u));
+    } catch {
+      alert('Failed to update user role');
+    } finally {
+      setPromotingUserId(null);
     }
   };
 
@@ -547,7 +561,7 @@ export default function AdminPage() {
               <div className="overflow-x-auto rounded-2xl border border-blush">
                 <table className="w-full">
                   <thead className="bg-blush/40">
-                    <tr>{['Customer', 'Email', 'Joined', 'Orders', 'Total Spent', 'Role'].map(h => (
+                    <tr>{['Customer', 'Email', 'Joined', 'Orders', 'Total Spent', 'Role', 'Actions'].map(h => (
                       <th key={h} className="px-4 py-3 text-left font-body text-burgundy/70 text-xs uppercase tracking-wide">{h}</th>
                     ))}</tr>
                   </thead>
@@ -572,6 +586,23 @@ export default function AdminPage() {
                           {u.isAdmin
                             ? <span className="px-2.5 py-1 rounded-full text-xs font-body font-semibold bg-burgundy/10 text-burgundy">Admin</span>
                             : <span className="px-2.5 py-1 rounded-full text-xs font-body font-semibold bg-blush text-burgundy/60">Customer</span>}
+                        </td>
+                        <td className="px-4 py-3">
+                          {u._id !== user?.id && (
+                            <button
+                              onClick={() => handlePromote(u._id, !u.isAdmin)}
+                              disabled={promotingUserId === u._id}
+                              className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-colors disabled:opacity-50 ${
+                                u.isAdmin
+                                  ? 'border border-red-300 text-red-500 hover:bg-red-50'
+                                  : 'border border-burgundy/30 text-burgundy hover:bg-blush'
+                              }`}
+                            >
+                              {promotingUserId === u._id
+                                ? <Loader2 size={12} className="animate-spin inline" />
+                                : u.isAdmin ? 'Remove Admin' : 'Make Admin'}
+                            </button>
+                          )}
                         </td>
                       </tr>
                     ))}

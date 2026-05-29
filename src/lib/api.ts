@@ -130,6 +130,16 @@ export async function getAllUsers(token: string): Promise<AdminUser[]> {
   return res.json();
 }
 
+export async function promoteUser(id: string, isAdmin: boolean, token: string): Promise<AdminUser> {
+  const res = await fetch(`${BASE}/api/users/${id}/promote`, {
+    method: 'PATCH',
+    headers: authHeaders(token),
+    body: JSON.stringify({ isAdmin }),
+  });
+  if (!res.ok) throw new Error('Failed to update user role');
+  return res.json();
+}
+
 export async function getDashboardStats(token: string): Promise<DashboardStats> {
   const res = await fetch(`${BASE}/api/analytics/dashboard`, {
     headers: { Authorization: `Bearer ${token}` },

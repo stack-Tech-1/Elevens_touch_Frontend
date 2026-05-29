@@ -27,11 +27,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = (token: string, user: User) => {
     localStorage.setItem('elevens_auth', JSON.stringify({ token, user }));
+    document.cookie = 'elevens_auth=1; path=/; max-age=604800';
     setState({ token, user });
   };
 
   const logout = () => {
     localStorage.removeItem('elevens_auth');
+    document.cookie = 'elevens_auth=; path=/; max-age=0';
     setState({ user: null, token: null });
   };
 

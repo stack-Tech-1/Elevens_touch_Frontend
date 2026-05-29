@@ -92,7 +92,7 @@ export default function CheckoutPage() {
         email: data.email,
         amount: grandTotal * 100,
         currency: 'NGN',
-        ref: `ET-${Date.now()}`,
+        ref: `ET-${crypto.randomUUID()}`,
         onClose: () => setIsProcessing(false),
         callback: (response: { reference: string }) => {
           handlePaymentSuccess(response.reference, data);
