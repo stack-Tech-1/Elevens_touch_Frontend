@@ -55,7 +55,7 @@ export default function AboutPage() {
           </div>
           <div className="relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden">
-              <Image src="/images/founder.jpg" alt="Founder" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src="/images/founder.jpeg" alt="Founder" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-mauve text-white rounded-2xl p-6 shadow-xl">
               <p className="font-display text-2xl">2020</p>

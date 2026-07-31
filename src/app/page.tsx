@@ -152,7 +152,7 @@ export default function HomePage() {
               className="relative aspect-[4/5] rounded-3xl overflow-hidden"
             >
               <Image
-                src="/images/founder.jpg"
+                src="/images/founder.jpeg"
                 alt="Elevens Touch founder"
                 fill
                 className="object-cover"
